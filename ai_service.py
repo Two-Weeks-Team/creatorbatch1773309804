@@ -81,9 +81,9 @@ def _normalize_inference_payload(payload: object) -> dict[str, object]:
 
 
 APP_NAME = "Creator Batch Studio"
-APP_TAGLINE = "Build a premium web service that turns a creator's rough YouTube-based content idea into a batchable short-form producti"
-KEY_FEATURES = ["hook card", "shot list", "repurpose lane", "publish queue"]
-PROOF_POINTS = ["multi-post content batch", "platform-specific hook variations", "shoot-day checklist", "first screen shows content workflow objects instead of KPI tiles"]
+APP_TAGLINE = "Creator workflow remote deploy"
+KEY_FEATURES = ["Guided workflow", "Insights panel", "Saved sessions"]
+PROOF_POINTS = ["Shareable outputs", "Visible recent activity", "Clear next actions"]
 
 
 def build_plan(query: str, preferences: str) -> dict:

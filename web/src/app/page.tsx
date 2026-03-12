@@ -29,6 +29,9 @@ const LAYOUT: LayoutKind = "storyboard";
 const UI_COPY_TONE = "creator-native and decisive";
 const SAMPLE_ITEMS = ["multi-post content batch", "platform-specific hook variations", "shoot-day checklist", "Hook variant"];
 const REFERENCE_OBJECTS = ["hook card", "shot list", "repurpose lane", "publish queue", "content batch"];
+const HERO_VISUAL = "/hero-scene.svg";
+const THUMBS = ["/thumb-1.svg", "/thumb-2.svg", "/thumb-3.svg"];
+const DOMAIN_CLASS = "creator-batch-studio";
 
 type PlanItem = { title: string; detail: string; score: number };
 type InsightPayload = { insights: string[]; next_actions: string[]; highlights: string[] };
@@ -75,6 +78,7 @@ export default function Page() {
       tagline={TAGLINE}
       proofPoints={PROOF_POINTS}
       eyebrow={SURFACE_LABELS.hero}
+      visualSrc={HERO_VISUAL}
     />
   );
   const statsNode = <StatsStrip stats={stats} />;
@@ -111,10 +115,82 @@ export default function Page() {
       items={SAMPLE_ITEMS}
       objects={REFERENCE_OBJECTS}
       tone={UI_COPY_TONE}
+      thumbs={THUMBS}
     />
   );
 
   function renderLayout() {
+    if (DOMAIN_CLASS === "creator-batch-studio") {
+      return (
+        <section className="creator-shell">
+          <div className="creator-topline">
+            <div className="creator-workbench">
+              {workspaceNode}
+              {statsNode}
+            </div>
+            {heroNode}
+          </div>
+          <div className="creator-editorial-stage">
+            <div className="creator-side-rail">
+              {featureNode}
+            </div>
+            <div className="creator-primary-rail">{primaryNode}</div>
+            <div className="creator-library-rail">
+              {referenceNode}
+            </div>
+          </div>
+          <div className="creator-bottomline">
+            <div className="creator-collection-rail">
+              {collectionNode}
+            </div>
+            <div className="creator-proof-rail">{referenceNode}</div>
+          </div>
+        </section>
+      );
+    }
+
+    if (DOMAIN_CLASS === "weekender-route-postcards") {
+      return (
+        <section className="travel-shell">
+          {heroNode}
+          {statsNode}
+          <div className="travel-ribbon">{referenceNode}</div>
+          <div className="travel-planner-grid">
+            <div className="travel-brief-column">{workspaceNode}</div>
+            <div className="travel-result-column">
+              {primaryNode}
+              {collectionNode}
+            </div>
+            <div className="travel-proof-column">
+              {featureNode}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    if (DOMAIN_CLASS === "meal-prep-atlas") {
+      return (
+        <section className="meal-shell">
+          <div className="meal-top-row">
+            {heroNode}
+            <div className="meal-proof-stack">
+              {statsNode}
+              {featureNode}
+            </div>
+          </div>
+          <div className="meal-main-grid">
+            <div className="meal-planner-column">{workspaceNode}</div>
+            <div className="meal-reference-column">{referenceNode}</div>
+          </div>
+          <div className="meal-bottom-row">
+            {primaryNode}
+            {collectionNode}
+          </div>
+        </section>
+      );
+    }
+
     if (LAYOUT === "storyboard") {
       return (
         <>
@@ -243,8 +319,8 @@ export default function Page() {
   }
 
   return (
-    <main className={`page-shell layout-${layoutClass}`}>
+    <main className={`page-shell layout-${layoutClass} domain-${DOMAIN_CLASS}`}>
       {renderLayout()}
     </main>
-  );
+    );
 }
